@@ -40,19 +40,20 @@ form {
 
 .buttonCurrentLocation {
   background-color: rgb(133, 133, 198);
+  border-color: rgb(140, 140, 200);
+  border-width: 5px;
   font-size: 15px;
+  color: white;
   margin: 20px 0 10px 180px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
   transition: all 200ms ease;
   
 }
-.btn {
--bs-btn-border-color: green;
--bs-btn-bg: pink;
-}
-
 
 .buttonCurrentLocation:hover {
-  background-color: rgb(66, 66, 96);;
+  background-color: rgb(66, 66, 96) ;
+ 
 }
 
 
@@ -137,5 +138,6 @@ form {
   margin-right: 10px;
 }
 .linkCode {
+ color: rgb(133, 133, 198);
   margin: 0 20px;
 }
