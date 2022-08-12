@@ -1,0 +1,138 @@
+ul {
+  list-style: none;
+  padding-left: 5px;
+}
+body {
+  font-family: "Merriweather Sans", sans-serif;
+  margin: 40px 60px;
+}
+
+h1 {
+  font-size: 64px;
+  margin: 10px 0 10px 20px;
+  text-shadow: 1px 2px 10px rgb(125, 105, 234);
+  padding: 0 0 10px 20px;
+}
+
+h2 {
+  font-size: 50px;
+  margin: 10px 0 10px 100px;
+}
+
+.degreesCF {
+  display: inline;
+  position: relative;
+  top: -85px;
+  left: 120px;
+}
+
+.container {
+  display: flexbox;
+  width: 600px;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: stretch;
+}
+
+form {
+  margin: 0 0 20px 100px;
+}
+
+.buttonCurrentLocation {
+  background-color: rgb(133, 133, 198);
+  font-size: 15px;
+  margin: 20px 0 10px 180px;
+  transition: all 200ms ease;
+  
+}
+.btn {
+-bs-btn-border-color: green;
+-bs-btn-bg: pink;
+}
+
+
+.buttonCurrentLocation:hover {
+  background-color: rgb(66, 66, 96);;
+}
+
+
+.date-time {
+  font-size: 20px;
+  font-weight: 200;
+  opacity: 75%;
+  margin: 0 0 10px 100px;
+}
+.city-search {
+  font-size: 12px;
+  opacity: 75%;
+  font-style: italic;
+}
+
+.cloud-and-sun {
+  font-size: 50px;
+  color: rgb(133, 133, 198);
+  margin: 0 0 0 20px;
+  padding: 0 0 10px 20px;
+  position: relative;
+  top: -30px;
+}
+
+.today-text {
+  text-align: left;
+  font-size: 14px;
+  font-style: italic;
+  margin: 10px 0 10px 10px;
+  position: relative;
+  top: -40px;
+  left: 20px;
+  /* padding: 0 0 10px 20px; */
+}
+
+.temperature-today {
+  font-size: 14px;
+  color: grey;
+  opacity: 75%;
+  margin: 0 0 0 20px;
+  position: relative;
+  top: -25px;
+  left: 15px;
+}
+
+.arrow-up {
+  color: orange;
+}
+.arrow-dn {
+  color: blue;
+}
+
+.properties-weather {
+  font-size: 12px;
+  color: grey;
+  opacity: 75%;
+  margin-left: 100px;
+}
+
+.weather-today {
+  display: block;
+  border: solid;
+  border-radius: 30px;
+  border-color: rgb(163, 162, 162);
+  padding: 20px 0 10px 0px;
+}
+
+.cloud-rain {
+  font-size: 35px;
+  color: rgb(133, 133, 198);
+}
+.sun {
+  font-size: 35px;
+  color: rgb(243, 243, 178);
+}
+
+.week {
+  /* margin: 10px 0 10px 10px; */
+  text-align: center;
+  opacity: 75%;
+  padding: 0 0 10px 0;
+  margin-right: 10px;
+}
