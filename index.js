@@ -59,13 +59,13 @@ let windDirection = ["N", "N / NE", "NE", "E / NE", "E", "E / SE", "SE", "S / SE
 
 let currentDateTime = document.querySelector("#fullCurrentDate");
 currentDateTime.innerHTML = currentDay(new Date()); //so-called installing current date and time. calling function date and timr
-
+let temp_current = null;
 //get current temperature
 function displayTemp(response) {
-  console.log(response.data);
-  let temperature = Math.round(response.data.main.temp);
+  temp_current = Math.round(response.data.main.temp);
+    
   let t_current = document.querySelector("h1");
-  t_current.innerHTML = `${temperature}`;
+  t_current.innerHTML = `${ temp_current}`;
  
   let description = response.data.weather[0].description;
   let d_current = document.querySelector("#description_current");
@@ -87,7 +87,10 @@ function displayTemp(response) {
   let humidity_current = document.querySelector("#humidity");
   humidity_current.innerHTML = `${humidity}`;
 
-  let wind_dir = Math.round((response.data.wind.deg) / 22.5+1);
+  let wind_dir = Math.round((response.data.wind.deg) / 22.5 + 1);
+  if (wind_dir >= 17) {
+    wind_dir = 0;
+  }
   let w_direction = windDirection[wind_dir];
   let wind_dir_cur = document.querySelector("#direction");
   wind_dir_cur.innerHTML = `${w_direction}`;
@@ -106,7 +109,7 @@ function displayTemp(response) {
 
   function FahrenheitDegrees(event) {
   event.preventDefault();
-  let temp_current = Math.round(response.data.main.temp);
+  
   let f = Math.round(((temp_current) * 9) / 5 + 32);  
   let f_temp = document.querySelector("#temperature");
   f_temp.innerHTML = `${f}`;
@@ -114,12 +117,11 @@ function displayTemp(response) {
 }
  let fahrenheitLink = document.querySelector("#Fahrenheit");
   fahrenheitLink.addEventListener("click", FahrenheitDegrees); //link for switch to Fahrenheit
-  
+
   function CelsiusDegrees(event) {
   event.preventDefault();
-  let temperature = Math.round(response.data.main.temp);
   let t_current = document.querySelector("h1");
-  t_current.innerHTML = `${temperature}`
+    t_current.innerHTML = `${temp_current}`;
 }
 //function that converting degrees in Celsius to Fahrenheit 
 
