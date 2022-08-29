@@ -140,16 +140,4 @@ function displayCurrentLocation() {
   navigator.geolocation.getCurrentPosition(getCurrentLocationTemperature);
 }
 
-function changeColor() {
-  btn.style.background = color[index];
-  btn.style.color = "white";
-   index = index >= colors.length - 1 ? 0 : index + 1;
-}
- let button = document.querySelector("#btn-current-location");
-button.addEventListener("click", displayCurrentLocation);
-const btn = document.getElementById(`btn-current-locatio`);
-let index = 0;
-const colorsBtn = [blue, green];
-btn.addEventListener("click", changeColor);
-
 
