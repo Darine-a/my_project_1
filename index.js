@@ -62,6 +62,7 @@ currentDateTime.innerHTML = currentDay(new Date()); //so-called installing curre
 
 //get current temperature
 function displayTemp(response) {
+  console.log(response.data);
   let temperature = Math.round(response.data.main.temp);
   let t_current = document.querySelector("h1");
   t_current.innerHTML = `${temperature}`;
@@ -94,7 +95,9 @@ function displayTemp(response) {
   let wind_speed = Math.round(response.data.wind.speed);
   let speed_current = document.querySelector("#speed");
   speed_current.innerHTML = `${wind_speed}`;
-
+  
+  let icon = document.querySelector("#icon_main");
+  icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   
   let city = response.data.name;
   let c_city = document.querySelector("h2");
