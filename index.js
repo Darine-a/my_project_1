@@ -57,8 +57,6 @@ function currentDay(today) {
 
 let windDirection = ["N", "N / NE", "NE", "E / NE", "E", "E / SE", "SE", "S / SE", "S", "S / SW", "SW", "W / SW", "W", "W / NW", "NW", "N / NW", "N"];
 
-
-
 let currentDateTime = document.querySelector("#fullCurrentDate");
 currentDateTime.innerHTML = currentDay(new Date()); //so-called installing current date and time. calling function date and timr
 
@@ -101,6 +99,28 @@ function displayTemp(response) {
   let city = response.data.name;
   let c_city = document.querySelector("h2");
   c_city.innerHTML = `${city}`;
+
+  function FahrenheitDegrees(event) {
+  event.preventDefault();
+  let temp_current = Math.round(response.data.main.temp);
+  let f = Math.round(((temp_current) * 9) / 5 + 32);  
+  let f_temp = document.querySelector("#temperature");
+  f_temp.innerHTML = `${f}`;
+  
+}
+ let fahrenheitLink = document.querySelector("#Fahrenheit");
+  fahrenheitLink.addEventListener("click", FahrenheitDegrees); //link for switch to Fahrenheit
+  
+  function CelsiusDegrees(event) {
+  event.preventDefault();
+  let temperature = Math.round(response.data.main.temp);
+  let t_current = document.querySelector("h1");
+  t_current.innerHTML = `${temperature}`
+}
+//function that converting degrees in Celsius to Fahrenheit 
+
+let celsiusLink = document.querySelector("#celsiusLink");
+celsiusLink.addEventListener("click", CelsiusDegrees); //link for switch to Celsius
 }
 
 //get current GPS coordinate
@@ -130,5 +150,3 @@ const colorsBtn = [blue, green];
 btn.addEventListener("click", changeColor);
 
 
-
-  //function that conwerting degrees in Celsius, i.e it's default but that's function switch it back
