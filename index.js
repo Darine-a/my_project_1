@@ -98,6 +98,7 @@ function displayTemp(response) {
   
   let icon = document.querySelector("#icon_main");
   icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  icon.setAttribute("alt", response.data.weather[0].description);
   
   let city = response.data.name;
   let c_city = document.querySelector("h2");
