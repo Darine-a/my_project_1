@@ -15,37 +15,13 @@ function currentCity(event) {
   let apiKey = "5773e0d67acfebf51412bf8636bf6a5b";
   let unit = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${apiKey}&units=${unit}`;
-  axios.get(`${apiUrl}&appid=${apiKey}`).then(displayTemp);
-  
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(displayTemp);  
   citynew.reset();
 }
 
 let citynew = document.querySelector("#search-city"); 
 citynew.addEventListener("submit", currentCity); // calling function currentcity after submitting search - form
 // функция вычисляет текущую дату, время и день недели
-
-
-function CelsiusDegrees(event) {
-  event.preventDefault();
-  celsiusLink.classList.add("active");
-  
-}
-//function that converting degrees in Celsius to Fahrenheit 
-function FahrenheitDegrees(event) {
-  event.preventDefault();
-  let temp_current = 15;
-  let f = Math.round(((temp_current) * 9) / 5 + 32);  
-  let f_temp = document.querySelector("#temperature");
-  f_temp.innerHTML = `${f}`;
-  
-}
-let celsiusLink = document.querySelector(".celsiusLink");
-celsiusLink.addEventListener("click", CelsiusDegrees); //link for switch to Celsius
-
-  let fahrenheitLink = document.querySelector(".fahrenheitLink");
-fahrenheitLink.addEventListener("click", FahrenheitDegrees); //link for switch to Fahrenheit
-  
-
 
 function currentDay(today) {
   today = new Date();
@@ -140,8 +116,6 @@ axios.get(`${apiUrl}&appid=${apiKey}`).then(displayTemp);
 function displayCurrentLocation() {
   navigator.geolocation.getCurrentPosition(getCurrentLocationTemperature);
 }
-
-
 
 function changeColor() {
   btn.style.background = color[index];
