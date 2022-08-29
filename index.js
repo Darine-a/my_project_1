@@ -143,4 +143,5 @@ function displayCurrentLocation() {
   navigator.geolocation.getCurrentPosition(getCurrentLocationTemperature);
 }
 
-
+let button = document.querySelector("#btn-current-location");
+button.addEventListener("click", displayCurrentLocation);
