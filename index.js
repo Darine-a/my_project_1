@@ -16,12 +16,35 @@ function currentCity(event) {
   let unit = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${apiKey}&units=${unit}`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(displayTemp);
+  
   citynew.reset();
 }
 
 let citynew = document.querySelector("#search-city"); 
 citynew.addEventListener("submit", currentCity); // calling function currentcity after submitting search - form
 // функция вычисляет текущую дату, время и день недели
+
+
+function CelsiusDegrees(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  
+}
+//function that converting degrees in Celsius to Fahrenheit 
+function FahrenheitDegrees(event) {
+  event.preventDefault();
+  let temp_current = 15;
+  let f = Math.round(((temp_current) * 9) / 5 + 32);  
+  let f_temp = document.querySelector("#temperature");
+  f_temp.innerHTML = `${f}`;
+  
+}
+let celsiusLink = document.querySelector(".celsiusLink");
+celsiusLink.addEventListener("click", CelsiusDegrees); //link for switch to Celsius
+
+  let fahrenheitLink = document.querySelector(".fahrenheitLink");
+fahrenheitLink.addEventListener("click", FahrenheitDegrees); //link for switch to Fahrenheit
+  
 
 
 function currentDay(today) {
@@ -56,29 +79,9 @@ function currentDay(today) {
   return `${currentHours}:${currentMinutes}, ${currentDay}, ${currentDate} ${currentMonth}`;
 }
 
-let c = 17; //переменная градусов по Цельсию с целью перевода в Фаренгейт,
-  //нужно заменить на текущие градусы, запрашиваемого города
+let windDirection = ["N", "N / NE", "NE", "E / NE", "E", "E / SE", "SE", "S / SE", "S", "S / SW", "SW", "W / SW", "W", "W / NW", "NW", "N / NW", "N"];
 
-  //function that conwerting degrees in Celsius, i.e it's default but that's function switch it back
-function CelsiusDegrees(event) {
-  event.preventDefault();
 
-  let h1 = document.querySelector("h1");
-  h1.innerHTML = c;
-}
-//function that converting degrees in Celsius to Fahrenheit 
-function FahrenheitDegrees(event) {
-  event.preventDefault();
-  let f = Math.round((c * 9) / 5 + 32);
-  let h1 = document.querySelector("h1");
-  h1.innerHTML = f;
-}
-
-let CelsiusLink = document.querySelector("#Celsius");
-CelsiusLink.addEventListener("click", CelsiusDegrees); //link for switch to Celsius
-
-let FahrenheitLink = document.querySelector("#Fahrenheit");
-FahrenheitLink.addEventListener("click", FahrenheitDegrees); //link for switch to Fahrenheit
 
 let currentDateTime = document.querySelector("#fullCurrentDate");
 currentDateTime.innerHTML = currentDay(new Date()); //so-called installing current date and time. calling function date and timr
@@ -88,6 +91,37 @@ function displayTemp(response) {
   let temperature = Math.round(response.data.main.temp);
   let t_current = document.querySelector("h1");
   t_current.innerHTML = `${temperature}`;
+ 
+  let description = response.data.weather[0].description;
+  let d_current = document.querySelector("#description_current");
+  d_current.innerHTML = `${description}`;
+
+  let t_min = Math.round(response.data.main.temp_min);
+  let t_min_current = document.querySelector("#t_min");
+  t_min_current.innerHTML = `${t_min}`;
+
+  let t_max = Math.round(response.data.main.temp_max);
+  let t_max_current = document.querySelector("#t_max");
+  t_max_current.innerHTML = `${t_max}`;
+
+  let pressure = Math.round((response.data.main.pressure) / 1.333);
+  let pressure_current = document.querySelector("#pressure_current");
+  pressure_current.innerHTML = `${pressure}`;
+
+  let humidity = Math.round(response.data.main.humidity);
+  let humidity_current = document.querySelector("#humidity");
+  humidity_current.innerHTML = `${humidity}`;
+
+  let wind_dir = Math.round((response.data.wind.deg) / 22.5+1);
+  let w_direction = windDirection[wind_dir];
+  let wind_dir_cur = document.querySelector("#direction");
+  wind_dir_cur.innerHTML = `${w_direction}`;
+
+  let wind_speed = Math.round(response.data.wind.speed);
+  let speed_current = document.querySelector("#speed");
+  speed_current.innerHTML = `${wind_speed}`;
+
+  
   let city = response.data.name;
   let c_city = document.querySelector("h2");
   c_city.innerHTML = `${city}`;
@@ -107,6 +141,8 @@ function displayCurrentLocation() {
   navigator.geolocation.getCurrentPosition(getCurrentLocationTemperature);
 }
 
+
+
 function changeColor() {
   btn.style.background = color[index];
   btn.style.color = "white";
@@ -118,3 +154,7 @@ const btn = document.getElementById(`btn-current-locatio`);
 let index = 0;
 const colorsBtn = [blue, green];
 btn.addEventListener("click", changeColor);
+
+
+
+  //function that conwerting degrees in Celsius, i.e it's default but that's function switch it back
