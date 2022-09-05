@@ -1,6 +1,6 @@
 // функция вставляет значение, которое вводится в поле поиска в заголовок h2, если значение 
 //null - всплывает окно с просьюой ввести название города. после выполнения осущ-ся автоматическая очистка формы поиска
-function currentCity(event) {
+function searchCity(event) {
   event.preventDefault();
   let city = document.querySelector("#nowCity");
   // h2.innerHTML = "Paris";
@@ -20,7 +20,7 @@ function currentCity(event) {
 }
 
 let citynew = document.querySelector("#search-city"); 
-citynew.addEventListener("submit", currentCity); // calling function currentcity after submitting search - form
+citynew.addEventListener("submit", searchCity); // calling function currentcity after submitting search - form
 // функция вычисляет текущую дату, время и день недели
 
 function currentDay(today) {
@@ -60,12 +60,22 @@ let windDirection = ["N", "N / NE", "NE", "E / NE", "E", "E / SE", "SE", "S / SE
 let currentDateTime = document.querySelector("#fullCurrentDate");
 currentDateTime.innerHTML = currentDay(new Date()); //so-called installing current date and time. calling function date and timr
 let temp_current = null;
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+ let apiKey = "c95d60a1e3adbeb286133f1ebebc2579";
+  let unit = "metric";
+   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
+  console.log(apiUrl);
+  axios.get(`${apiUrl}`).then(displayForecast);
+}
+
 //get current temperature
 function displayTemp(response) {
   temp_current = Math.round(response.data.main.temp);
     
   let t_current = document.querySelector("h1");
-  t_current.innerHTML = `${ temp_current}`;
+  t_current.innerHTML = `${temp_current}`;
  
   let description = response.data.weather[0].description;
   let d_current = document.querySelector("#description_current");
@@ -107,9 +117,15 @@ function displayTemp(response) {
   let c_city = document.querySelector("h2");
   c_city.innerHTML = `${city}`;
 
+  getForecast(response.data.coord);
+  
+}
   function FahrenheitDegrees(event) {
   event.preventDefault();
-  
+    celsiusLink.classList.remove("active");
+    Fahrenheit.classList.add("active");
+
+    Fahrenheit.classList.add("active")
   let f = Math.round(((temp_current) * 9) / 5 + 32);  
   let f_temp = document.querySelector("#temperature");
   f_temp.innerHTML = `${f}`;
@@ -127,7 +143,7 @@ function displayTemp(response) {
 
 let celsiusLink = document.querySelector("#celsiusLink");
 celsiusLink.addEventListener("click", CelsiusDegrees); //link for switch to Celsius
-}
+
 
 //get current GPS coordinate
 function getCurrentLocationTemperature(position) {
@@ -145,3 +161,39 @@ function displayCurrentLocation() {
 
 let button = document.querySelector("#btn-current-location");
 button.addEventListener("click", displayCurrentLocation);
+
+function displayForecast(response) {
+  console.log(response.data);
+  let forecastElement = document.querySelector("#weather-forecast");
+  let forecastHTML = `<div class="row text-center forecast" id="weather-forecast">`;
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  days.forEach(function (day) {
+    forecastHTML = forecastHTML + `
+      <div class="col-2">
+        <ul>
+          <li><img class="icon-forecast-day1" src="http://openweathermap.org/img/wn/10d@2x.png" alt="" width="" />
+          </li>
+          <li><span class="weather-forecast-temp-max">20</span> ° | <span class="weather-forecast-temp-min">12</span> °
+          </li>
+          <li id="forecast_d1">${day}</li>
+      </div>`;
+   
+  });
+   forecastHTML = forecastHTML + `</div>`;
+    forecastElement.innerHTML = forecastHTML;
+}
+
+let myDate = new Date(1662148205*1000);
+let firstDateNormal = myDate.toLocaleString();
+let firstdate = new Date(firstDateNormal);
+let dayFirst = firstdate.getDay();
+console.log(dayFirst);
+//document.write(myDate.toGMTString()+"<br>"+myDate.toLocaleString())
+// let firstDayForecast = Math.floor(new Date().getTime() / 1000.0);
+// let forecast1 = document.querySelector("#forecast_d1");
+// forecast1.innerHTML = firstDayForecast;
+
+// const today = new Date('Wed, 14 Jun 2017 00:00:00 PDT');
+// const UTCstring = today.toUTCString();
+// let forecast1 = document.querySelector("#forecast_d1");
+// forecast1.innerHTML = UTCstring ;

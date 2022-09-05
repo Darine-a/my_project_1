@@ -23,6 +23,13 @@ ul {
   padding-left: 5px;
 }
 
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+}
+
 img {
   vertical-align: top;
   width: 120px;
@@ -77,13 +84,15 @@ form {
   font-style: italic;
 }
 
-.cloud-and-sun {
-  font-size: 20px;
+.icon_main {
+  font-size: 10px;
   color: rgb(133, 133, 198);
   margin: 0 0 0 10px;
   padding: 0 0 0 20px;
   position: relative;
   top: -70px;
+  left: 0;
+  
   
 }
 
@@ -138,21 +147,35 @@ form {
   padding: 20px 0 10px 0px;
 }
 
-.cloud-rain {
-  font-size: 35px;
-  color: rgb(133, 133, 198);
+.weather-today .celsiusLink {
+color: grey; 
+opacity: 75%;
+cursor: default;
+ text-decoration: none;
 }
+.fahrenheitLink {
+  text-decoration: none;
+}
+.weather-today .celsiusLink:hover {
+  text-decoration: none;
+}
+
+.icon-forecast-day1 {
+ width: 50px;
+ 
+
+  }
 .sun {
   font-size: 35px;
   color: rgb(243, 243, 178);
 }
 
-.week {
+.forecast {
   /* margin: 10px 0 10px 10px; */
   text-align: center;
-  opacity: 75%;
-  padding: 0 0 10px 0;
-  margin-right: 10px;
+  opacity: 80%;
+  padding: 0 0 10px 20px;
+  width: 650px;
 }
 .linkCode {
  color: rgb(133, 133, 198);
