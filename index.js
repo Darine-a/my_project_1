@@ -16,12 +16,16 @@ function searchCity(event) {
   let unit = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&appid=${apiKey}&units=${unit}`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(displayTemp);  
+  
   citynew.reset();
 }
 
 let citynew = document.querySelector("#search-city"); 
-citynew.addEventListener("submit", searchCity); // calling function currentcity after submitting search - form
+citynew.addEventListener("submit", searchCity);
+
+ // calling function currentcity after submitting search - form
 // функция вычисляет текущую дату, время и день недели
+ let week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 function currentDay(today) {
   today = new Date();
@@ -35,7 +39,7 @@ function currentDay(today) {
   }
 
   let currentDate = today.getDate();
-  let week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+ 
   let months = [
     "Jan",
     "Feb",
@@ -60,6 +64,13 @@ let windDirection = ["N", "N / NE", "NE", "E / NE", "E", "E / SE", "SE", "S / SE
 let currentDateTime = document.querySelector("#fullCurrentDate");
 currentDateTime.innerHTML = currentDay(new Date()); //so-called installing current date and time. calling function date and timr
 let temp_current = null;
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  return week[day];
+
+}
 
 function getForecast(coordinates) {
   console.log(coordinates);
@@ -163,31 +174,31 @@ let button = document.querySelector("#btn-current-location");
 button.addEventListener("click", displayCurrentLocation);
 
 function displayForecast(response) {
-  console.log(response.data);
+  
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#weather-forecast");
+  
   let forecastHTML = `<div class="row text-center forecast" id="weather-forecast">`;
-  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-  days.forEach(function (day) {
-    forecastHTML = forecastHTML + `
+  
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML = forecastHTML + `
       <div class="col-2">
         <ul>
-          <li><img class="icon-forecast-day1" src="http://openweathermap.org/img/wn/10d@2x.png" alt="" width="" />
+          <li><img class="icon-forecast-day1" src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="" />
           </li>
-          <li><span class="weather-forecast-temp-max">20</span> ° | <span class="weather-forecast-temp-min">12</span> °
-          </li>
-          <li id="forecast_d1">${day}</li>
+          <li><span class="weather-forecast-temp-max">${Math.round(forecastDay.temp.max)}° </span> | <span class="weather-forecast-temp-min">${Math.round(forecastDay.temp.min)}°</span>         </li>
+          <li id="forecast_d1">${formatDay(forecastDay.dt)}</li>
       </div>`;
    
+    }
   });
    forecastHTML = forecastHTML + `</div>`;
     forecastElement.innerHTML = forecastHTML;
 }
 
-let myDate = new Date(1662148205*1000);
-let firstDateNormal = myDate.toLocaleString();
-let firstdate = new Date(firstDateNormal);
-let dayFirst = firstdate.getDay();
-console.log(dayFirst);
+
 //document.write(myDate.toGMTString()+"<br>"+myDate.toLocaleString())
 // let firstDayForecast = Math.floor(new Date().getTime() / 1000.0);
 // let forecast1 = document.querySelector("#forecast_d1");

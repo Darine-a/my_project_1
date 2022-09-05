@@ -162,9 +162,7 @@ cursor: default;
 
 .icon-forecast-day1 {
  width: 50px;
- 
-
-  }
+   }
 .sun {
   font-size: 35px;
   color: rgb(243, 243, 178);
@@ -174,8 +172,8 @@ cursor: default;
   /* margin: 10px 0 10px 10px; */
   text-align: center;
   opacity: 80%;
-  padding: 0 0 10px 20px;
-  width: 650px;
+  padding: 0 0 10px 10px;
+ 
 }
 .linkCode {
  color: rgb(133, 133, 198);
